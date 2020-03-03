@@ -26,7 +26,7 @@
     $second_contact_phone = $_POST['second_contact_phone'];
 
     // Insert data into db
-    $result = $new_student->execute("INSERT INTO students(first_name,last_name) VALUES('$first_name','$last_name')");
+    $result = $new_student->execute("INSERT INTO students(first_name,last_name, enrol_date, dob, school_year, phone, mobile, email, first_contact_name, first_contact_phone, second_contact_name, second_contact_phone) VALUES('$first_name','$last_name', '$enrol_date', '$dob', '$school_year', '$phone', '$mobile', '$email', '$first_contact_name', '$first_contact_phone', '$second_contact_name', '$second_contact_phone')");
     if ($result) {
         header('Location: index.php'.'?message='.$first_name.' is inserted successfully');
     }

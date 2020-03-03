@@ -46,29 +46,6 @@ class dbConnection {
     return true;
   }
 
-  public function get($table, $columns, $condition = null)
-    {
-        if($condition != null)
-        {
-            $query = $this->conn->prepare("SELECT $columns FROM $table WHERE $condition");
-        } else {
-            $query = $this->conn->prepare("SELECT $columns FROM $table");
-        }
-
-        if($query->execute())
-        {
-            $this->count = $query->rowCount();
-            if($this->count > 0)
-            {
-                $this->results = $query->fetchAll();
-                return true;
-            }
-            return false;
-        }
-
-        return false;
-    }
-
   function __destruct(){
       $this->conn = null;
       // echo "Connection close\n";
