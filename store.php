@@ -1,5 +1,5 @@
 <?php
-  include_once("Student.php");
+  include_once("classes/Student.php");
 
   // Instantiate a student class and connect to db
   $new_student = new Student();
