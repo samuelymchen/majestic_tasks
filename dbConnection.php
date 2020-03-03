@@ -1,11 +1,19 @@
 <?php
 class dbConnection {
-  private $conn;
+
+  private $_host = 'localhost';
+  private $_dbname = 'majestic_task';
+  private $_username = 'test';
+  private $_password = 'test';
+
+  protected $conn;
+  protected $count;
+  protected $results = array();
 
   public function __construct() {
       try{
           // create a PostgreSQL database connection
-          $this->conn = new PDO("mysql:host=localhost;dbname=majestic_task;", "test", "test");
+          $this->conn = new PDO("mysql:host=$this->_host;dbname=$this->_dbname;", $this->_username, $this->_password);
 
           // display a message if connected to the PostgreSQL database successfully
           if($this->conn){
@@ -27,6 +35,39 @@ class dbConnection {
   public function connection(){
       return $this->conn;
   }
+
+  // Used for checking if table exists
+  function check_table_exists($table){
+    try{
+        $this->conn->query("SELECT 1 FROM $table");
+    } catch (PDOException $e){
+        return false;
+    }
+    return true;
+  }
+
+  public function get($table, $columns, $condition = null)
+    {
+        if($condition != null)
+        {
+            $query = $this->conn->prepare("SELECT $columns FROM $table WHERE $condition");
+        } else {
+            $query = $this->conn->prepare("SELECT $columns FROM $table");
+        }
+
+        if($query->execute())
+        {
+            $this->count = $query->rowCount();
+            if($this->count > 0)
+            {
+                $this->results = $query->fetchAll();
+                return true;
+            }
+            return false;
+        }
+
+        return false;
+    }
 
   function __destruct(){
       $this->conn = null;
