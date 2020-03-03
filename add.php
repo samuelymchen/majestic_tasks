@@ -1,3 +1,8 @@
+<?php
+  if (isset($_GET['message'])) {
+    echo $_GET['message'];
+  }
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -47,7 +52,7 @@
       }
 
       /* Format input style */
-      input[type=text], input[type=date]{
+      input[type=text], input[type=date], input[type=number]{
         width: 100%;
         padding: 12px;
         border: 1px solid #ccc;
@@ -73,7 +78,7 @@
             <h1>Add a Student</h1>
         </div>
         <div class="add-student-main">
-            <form class="add-student-form" action="store.php" method="post">
+            <form class="add-student-form" action="store.php" method="post" id="add-student-form">
                 <div class="form-group required-field">
                     <label for="first_name">First Name</label>
                     <input type="text" name="first_name">
@@ -83,12 +88,16 @@
                     <input type="text" name="last_name">
                 </div>
                 <div class="form-group">
+                  <label for="enrol_date">Enrol date</label>
+                  <input type="date" id="enrol_date" name="enrol_date">
+                </div>
+                <div class="form-group">
                   <label for="dob">Birthday</label>
                   <input type="date" id="dob" name="dob">
                 </div>
                 <div class="form-group">
                     <label for="school_year">Current School Year</label>
-                    <input type="text" name="school_year" placeholder="e.g. 7-12">
+                    <input type="number" name="school_year" placeholder="e.g. 7-12">
                 </div>
                 <div class="form-group">
                     <label for="phone">Home Phone</label>
