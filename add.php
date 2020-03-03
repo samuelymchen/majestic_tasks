@@ -70,6 +70,15 @@
         border-radius: 4px;
         cursor: pointer;
       }
+
+      button#home-btn {
+          background-color: #9a9a9a;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -127,6 +136,7 @@
                     <label for="second_contact_phone">Second Contact Phone</label>
                     <input type="text" name="second_contact_phone">
                 </div>
+                <button type="button" id="home-btn" onclick="window.location.href='/index.php'">Home</button>
                 <button type="submit" name="save-btn" id="save-btn">Add</button>
             </form>
         </div>
