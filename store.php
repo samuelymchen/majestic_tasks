@@ -14,9 +14,9 @@
   if (isset($_POST['first_name']) && !empty($_POST['first_name'])) {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
-    $enrol_date = $_POST['enrol_date'];
-    $dob = $_POST['dob'];
-    $school_year = $_POST['school_year'];
+    $enrol_date = ($_POST['enrol_date'] === '')?"NULL":$_POST['enrol_date'];
+    $dob = ($_POST['dob'] === '')?"NULL":$_POST['dob'];
+    $school_year = ($_POST['school_year'] === '')?"NULL":$_POST['school_year'];
     $phone = $_POST['phone'];
     $mobile = $_POST['mobile'];
     $email = $_POST['email'];
@@ -25,8 +25,12 @@
     $second_contact_name = $_POST['second_contact_name'];
     $second_contact_phone = $_POST['second_contact_phone'];
 
+    $data = array(
+        $first_name, $last_name, $enrol_date, $dob, $school_year, $phone, $mobile, $email, $first_contact_name, $first_contact_phone, $second_contact_name, $second_contact_phone
+    );
+
     // Insert data into db
-    $result = $new_student->execute("INSERT INTO students(first_name,last_name, enrol_date, dob, school_year, phone, mobile, email, first_contact_name, first_contact_phone, second_contact_name, second_contact_phone) VALUES('$first_name','$last_name', '$enrol_date', '$dob', '$school_year', '$phone', '$mobile', '$email', '$first_contact_name', '$first_contact_phone', '$second_contact_name', '$second_contact_phone')");
+    $result = $new_student->execute_query("INSERT INTO students(first_name,last_name, enrol_date, dob, school_year, phone, mobile, email, first_contact_name, first_contact_phone, second_contact_name, second_contact_phone) VALUES('$first_name','$last_name', $enrol_date, $dob, $school_year, '$phone', '$mobile', '$email', '$first_contact_name', '$first_contact_phone', '$second_contact_name', '$second_contact_phone')");
     if ($result) {
         header('Location: index.php'.'?message='.$first_name.' is inserted successfully');
     }
