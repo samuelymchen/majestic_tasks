@@ -20,7 +20,7 @@ class dbConnection {
               // echo "Connect to database successfully!\n";
           }
 
-          // allow PDO to throw exceptionsx
+          // allow PDO to throw exceptions
           $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 

@@ -3,14 +3,12 @@ include_once('dbConnection.php');
 
 class Student extends dbConnection {
 
-  public function __construct()
-    {
-        parent::__construct();
-    }
+  public function __construct() {
+      parent::__construct();
+  }
 
     // Fetch data from database
-    public function get_data($columns, $condition = null)
-    {
+    public function get_data($columns, $condition = null) {
         if($condition != null)
         {
             $query = $this->conn->prepare("SELECT $columns FROM students WHERE $condition");
@@ -33,16 +31,29 @@ class Student extends dbConnection {
     }
 
     // Method to execute query
-    public function execute($query)
-        {
-            try {
-              $result = $this->conn->prepare($query);
-              $result->execute();
-            } catch(PDOException $err) {
-              $message = "Error: Fail to insert student record into database, because: \n".$err->getMessage()."\n";
-              die($message);
-            }
-            return true;
+    public function execute_query($query) {
+        try {
+            $result = $this->conn->prepare($query);
+            $result->execute();
+        } catch(PDOException $err) {
+            $message = "Error: Fail to insert student record into database, because: \n".$err->getMessage();
+            header('Location: index.php'.'?message='.$message);
         }
+        return true;
+    }
+
+    // Method to delete student
+    public function delete($id) {
+        $query = "DELETE FROM students WHERE id = $id";
+
+        try {
+            $result = $this->conn->prepare($query);
+            $result->execute();
+        } catch(PDOException $err) {
+            $message = "Error: Fail to delete student from database, because: \n".$err->getMessage();
+            header('Location: index.php'.'?message='.$message);
+        }
+        return true;
+    }
 
 }

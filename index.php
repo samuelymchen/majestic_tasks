@@ -8,7 +8,7 @@ if (isset($_GET['message'])) {
 // Instantiate a student class and connect to db
 $Student = new Student();
 // Fetch students data from db
-$data = $Student->get_data('first_name,last_name, enrol_date, dob, school_year, mobile, email');
+$data = $Student->get_data('id, first_name,last_name, enrol_date, dob, school_year, mobile, email');
 ?>
 <!doctype html>
 <html lang="en">
@@ -102,7 +102,7 @@ $data = $Student->get_data('first_name,last_name, enrol_date, dob, school_year, 
                         <td>
                             <a href="#">View</a>
                             <a href="#">Edit</a>
-                            <a href="#">Delete</a>
+                            <a href="/delete.php?id=<?php echo $student['id']?>&first_name=<?php echo $student['first_name']?>">Delete</a>
                         </td>
                     </tr>
                 <?php } ?>
