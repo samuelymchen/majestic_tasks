@@ -4,6 +4,7 @@ CREATE TABLE students(
   id                INTEGER NOT NULL auto_increment,
   first_name        VARCHAR(255)NOT NULL,
   last_name         VARCHAR(255),
+  enrol_date        DATETIME,
   dob               DATETIME,
   school_year       INT,
   cust_phone        VARCHAR(255),
